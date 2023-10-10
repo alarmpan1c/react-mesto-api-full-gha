@@ -134,7 +134,6 @@ function App() {
   }
 
   function handleUpdataAvatar(data, eraseInpup) {
-    console.log(data)
     api.setAvataronServer(data, localStorage.jwt)
       .then(res => {
         setCurrentUser(res)
@@ -147,7 +146,6 @@ function App() {
   }
 
   function handleUpdataUser(data, eraseInpup) {
-    console.log(data)
     api.setInfoonServer(data, localStorage.jwt)
       .then(res => {
         setCurrentUser(res)
