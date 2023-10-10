@@ -49,6 +49,7 @@ const Main = memo(({name,  onAddPlace, onEditProfile, onEditAvatar,  onDeletePla
                                         cardPic={info}
                                         onCardClick={onCardClick}
                                         onDeletePlace={onDeletePlace}
+                                        cards={cards}
                                     //onCardLike={onCardLike}
                                     />
                                 )

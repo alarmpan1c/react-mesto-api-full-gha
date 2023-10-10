@@ -2,10 +2,12 @@ import { useContext } from "react"
 import CurrentUserContext from "../context/CurrentUserContexts"
 import Heart from "./Heart"
 
-function Card({ cardPic, onCardClick, onDeletePlace }) {
+function Card({ cardPic, onCardClick, onDeletePlace, cards }) {
 
     const currentUser = useContext(CurrentUserContext)
-    console.log(currentUser)
+    console.log('currentUserInCard', currentUser)
+    console.log('currentCard', cardPic)
+    console.log('cards', cards)
     return (
         <div className="elements__card">
             {/*<button className="elements__button-trash" type="button" aria-label="Удалить" onClick={onDeletePlace}/>*/}
