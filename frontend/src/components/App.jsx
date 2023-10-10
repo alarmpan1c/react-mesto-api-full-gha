@@ -64,15 +64,6 @@ function App() {
 
   useEffect(() => {
     handleCheck(localStorage.jwt);
-      // getUserData(localStorage.jwt)
-      //   .then(res => {
-      //     console.log('here', localStorage.jwt)
-      //     console.log(res, 'res')
-      //     setinfoUser(res.data.email)
-      //     setLoggedIn(true)
-      //     navigate('/')
-      //   })
-      //   .catch(error => console.log(`Ошибка повторного входа при авторизации ${error}`))
     }
 , [])
 
@@ -80,12 +71,10 @@ function App() {
     if (jwt) {
       getUserData(jwt)
         .then(data => {
-          console.log('currentUser', data)
           setinfoUser(data.email)
           setCurrentUser(data)
           setLoggedIn(true)
           navigate('/')
-          console.log(data)
         })
   }
   };
@@ -123,7 +112,6 @@ function App() {
       //Вывод массива карточек с сервера
       Promise.all([api.getInfo(localStorage.jwt), api.getPicture(localStorage.jwt)])
         .then(([infoUser, infoPicture]) => {
-          //console.log(infoPicture)
           setCurrentUser(infoUser)
           setCards(infoPicture.reverse())
 
@@ -131,7 +119,6 @@ function App() {
         })
         .catch((error => console.log('Ошибка при загрузке карточек с сервера', error)))
     }
-    //console.log(infoPicture)
   }, [loggedIn])
 
   function handleCardDelete(evt) {
@@ -141,7 +128,6 @@ function App() {
         setCards(cards.filter(items => {
           return items._id !== idCardForErase
         }))
-        //console.log(res)
         closeAllPopupForm()
       })
       .catch((err) => console.log('Ошибка удаления карточки'))
@@ -176,8 +162,6 @@ function App() {
   function handleAddPlaceSubmit(data, eraseInpup) {
     api.addCardonServer(data)
       .then(res => {
-        console.log(res)
-        console.log(cards)
         // res.owner = res.owner._id
         setCards([res, ...cards])
         closeAllPopupForm()
@@ -236,7 +220,8 @@ function App() {
               onEditAvatar={handleEditAvatarClick}
               onDeletePlace={handleDeleteClick}
               onCardClick={handleCardClick}
-              cards={cards} />} />
+              cards={cards} />}
+              currentUser={currentUser} />
             </Route>
             <Route path='/sign-up' element={
               <>

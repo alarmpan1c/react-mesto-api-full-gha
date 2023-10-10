@@ -7,7 +7,6 @@ function Heart({ heartCards, myId, cardPicId }) {
     const [blackOrWhite, setBlackOrWhite] = useState('white')
 
     useEffect(() => {
-        // console.log(heartCards)
         setBlackOrWhite(heartCards.some(items => myId === items) ? 'black' : 'white')
     }, [heartCards, myId])
 

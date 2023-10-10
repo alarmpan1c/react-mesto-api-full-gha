@@ -15,7 +15,7 @@ const Main = memo(({name,  onAddPlace, onEditProfile, onEditAvatar,  onDeletePla
 
     return (
         <main className="content">
-             {name === 'main' ? 
+            {name === 'main' ? 
                 <>
                     <section className="profile">
                         <button type="button" className="profile__avatar-button" onClick={onEditAvatar}>
