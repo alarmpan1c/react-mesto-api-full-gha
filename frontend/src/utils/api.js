@@ -31,12 +31,15 @@ class Api {
   }
   addHeartonServer(infoforServer, token) {
     console.log(infoforServer, token)
-    return this._request(`${this._url}/cards/${infoforServer}/likes`, {
+    return fetch(`${this._url}/cards/${infoforServer}/likes`, {
       method: 'PUT', 
       eaders: {
         authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
+    })
+    .then(res => {
+      return res.json()
     })
   }
   eraseHeartonServer(infoforServer, token) {
