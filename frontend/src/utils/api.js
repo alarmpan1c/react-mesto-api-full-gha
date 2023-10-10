@@ -33,7 +33,7 @@ class Api {
     console.log(infoforServer, token)
     return fetch(`${this._url}/cards/${infoforServer}/likes`, {
       method: 'PUT', 
-      eaders: {
+      headers: {
         authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
