@@ -29,23 +29,29 @@ class Api {
         'Content-Type': 'application/json'
     } })
   }
-  addHeartonServer(infoforServer) {
-    return this._request(`${this._url}/cards/${infoforServer}/likes`, { method: 'PUT', headers: { authorization: this._token, 'Content-Type': 'application/json' }, })
-  }
-  eraseHeartonServer(infoforServer) {
+  addHeartonServer(infoforServer, token) {
     return this._request(`${this._url}/cards/${infoforServer}/likes`, {
-      method: 'DELETE',
-      headers: {
-        authorization: this._token,
+      method: 'PUT', 
+      eaders: {
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
     })
   }
-  setInfoonServer(infoforServer) {
+  eraseHeartonServer(infoforServer, token) {
+    return this._request(`${this._url}/cards/${infoforServer}/likes`, {
+      method: 'DELETE',
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+    })
+  }
+  setInfoonServer(infoforServer, token) {
     return this._request(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
-        authorization: this._token,
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -54,11 +60,11 @@ class Api {
       })
     })
   }
-  setAvataronServer(infoforServer) {
+  setAvataronServer(infoforServer, token) {
     return this._request(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
-        authorization: this._token,
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -75,11 +81,11 @@ class Api {
       },
     })
   }
-  addCardonServer(infoforServer) {
+  addCardonServer(infoforServer, token) {
     return this._request(`${this._url}/cards`, {
       method: 'POST',
       headers: {
-        authorization: this._token,
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({

@@ -135,7 +135,7 @@ function App() {
 
   function handleUpdataAvatar(data, eraseInpup) {
     console.log(data)
-    api.setAvataronServer(data)
+    api.setAvataronServer(data, localStorage.jwt)
       .then(res => {
         setCurrentUser(res)
 
@@ -148,7 +148,7 @@ function App() {
 
   function handleUpdataUser(data, eraseInpup) {
     console.log(data)
-    api.setInfoonServer(data)
+    api.setInfoonServer(data, localStorage.jwt)
       .then(res => {
         setCurrentUser(res)
 
@@ -160,7 +160,7 @@ function App() {
   }
 
   function handleAddPlaceSubmit(data, eraseInpup) {
-    api.addCardonServer(data)
+    api.addCardonServer(data, localStorage.jwt)
       .then(res => {
         // res.owner = res.owner._id
         setCards([res, ...cards])

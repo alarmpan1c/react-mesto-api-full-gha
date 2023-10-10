@@ -12,7 +12,7 @@ function Heart({ heartCards, myId, cardPicId }) {
 
     function handleLikeClick() {
         if (blackOrWhite === 'black') {
-            api.eraseHeartonServer(cardPicId)
+            api.eraseHeartonServer(cardPicId, localStorage.jwt)
                 .then(res => {
 
                     setBlackOrWhite('white')
@@ -21,7 +21,7 @@ function Heart({ heartCards, myId, cardPicId }) {
                 .catch((err) => ('Ошибка удления лайка на сервере'))
         }
         else {
-            api.addHeartonServer(cardPicId)
+            api.addHeartonServer(cardPicId, localStorage.jwt)
                 .then(res => {
 
                     setBlackOrWhite('black')
