@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useCallback, useState } from 'react';
 
 
-function Header({ name, dataUser }) {
+function Header({ name, dataUser, setCurrentUser }) {
   const [count, setCount] = useState(0)
 
   const closeBurgerForResize = useCallback(() => {
@@ -25,9 +25,10 @@ function Header({ name, dataUser }) {
 
   function onSignOut() {
     setCount(0);
-    localStorage.removeItem('jwt')
+    localStorage.clear()
+    // setCurrentUser({});
   }
-
+  console.log(dataUser)
   return (
     <header className={`header page__header ${count !== 0 ? 'page__header_opened' : ''}`}>
       <img

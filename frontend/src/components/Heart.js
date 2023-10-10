@@ -3,13 +3,12 @@ import api from "../utils/api"
 
 function Heart({ heartCards, myId, cardPicId }) {
     //const cardLikeButtonClassName = (`${isLiked ? `elements__button-heart_black` : `element__button-heart`}`)
-
     const [countOfHeart, setCountOfHeart] = useState(heartCards.length)
     const [blackOrWhite, setBlackOrWhite] = useState('white')
 
     useEffect(() => {
         // console.log(heartCards)
-        setBlackOrWhite(heartCards.some(items => myId === items._id) ? 'black' : 'white')
+        setBlackOrWhite(heartCards.some(items => myId === items) ? 'black' : 'white')
     }, [heartCards, myId])
 
     function handleLikeClick() {

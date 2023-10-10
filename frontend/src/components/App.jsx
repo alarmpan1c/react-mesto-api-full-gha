@@ -63,17 +63,32 @@ function App() {
   const SendContext = createContext()
 
   useEffect(() => {
-    if (localStorage.jwt) {
-      getUserData(localStorage.jwt)
-        .then(res => {
-          setinfoUser(res.data.email)
+    handleCheck(localStorage.jwt);
+      // getUserData(localStorage.jwt)
+      //   .then(res => {
+      //     console.log('here', localStorage.jwt)
+      //     console.log(res, 'res')
+      //     setinfoUser(res.data.email)
+      //     setLoggedIn(true)
+      //     navigate('/')
+      //   })
+      //   .catch(error => console.log(`Ошибка повторного входа при авторизации ${error}`))
+    }
+, [])
+
+  function handleCheck(jwt) {
+    if (jwt) {
+      getUserData(jwt)
+        .then(data => {
+          console.log('currentUser', data)
+          setinfoUser(data.email)
+          setCurrentUser(data)
           setLoggedIn(true)
           navigate('/')
+          console.log(data)
         })
-        .catch(error => console.log(`Ошибка повторного входа при авторизации ${error}`))
-    }
-  }, [navigate])
-
+  }
+  };
 
   function handleDeleteClick(IDofCard) {
     setIsDeletePopupOpen(true)
@@ -106,11 +121,11 @@ function App() {
     if (loggedIn) {//загрузка карточек при усломии входа в систему
       //setSetupCard(true)
       //Вывод массива карточек с сервера
-      Promise.all([api.getInfo(), api.getPicture()])
+      Promise.all([api.getInfo(localStorage.jwt), api.getPicture(localStorage.jwt)])
         .then(([infoUser, infoPicture]) => {
           //console.log(infoPicture)
           setCurrentUser(infoUser)
-          setCards(infoPicture)
+          setCards(infoPicture.reverse())
 
           //setSetupCard(false )
         })
@@ -121,7 +136,7 @@ function App() {
 
   function handleCardDelete(evt) {
     evt.preventDefault()
-    api.eraseCardonServer(idCardForErase)
+    api.eraseCardonServer(idCardForErase, localStorage.jwt)
       .then(res => {
         setCards(cards.filter(items => {
           return items._id !== idCardForErase
@@ -133,6 +148,7 @@ function App() {
   }
 
   function handleUpdataAvatar(data, eraseInpup) {
+    console.log(data)
     api.setAvataronServer(data)
       .then(res => {
         setCurrentUser(res)
@@ -160,6 +176,9 @@ function App() {
   function handleAddPlaceSubmit(data, eraseInpup) {
     api.addCardonServer(data)
       .then(res => {
+        console.log(res)
+        console.log(cards)
+        // res.owner = res.owner._id
         setCards([res, ...cards])
         closeAllPopupForm()
         eraseInpup()
@@ -171,9 +190,10 @@ function App() {
     setIsSend(true)
     authorization(password, email)
       .then(res => {
+        console.log(res)
         localStorage.setItem('jwt', res.token)
         setLoggedIn(true)
-        navigate('/')
+        handleCheck(res.token)
       })
       .catch(err => {
         setIsError(true)
@@ -186,6 +206,7 @@ function App() {
   }
 
   function handleRegister(password, email) {
+    console.log(password, email)
     setIsSend(true)
     auth(password, email)
       .then(res => {
@@ -219,7 +240,7 @@ function App() {
             </Route>
             <Route path='/sign-up' element={
               <>
-                <Header name='signup' />
+                <Header name='signup' setCurrentUser={setCurrentUser}  />
                 <Main name='signup' handleRegister={handleRegister} />
               </>
             } />

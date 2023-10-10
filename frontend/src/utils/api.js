@@ -17,11 +17,17 @@ class Api {
     return fetch(url, option).then(this._checkResponse)
   }
 
-  getInfo() {
-    return this._request(`${this._url}/users/me`, { headers: { authorization: this._token } })
+  getInfo(token) {
+    return this._request(`${this._url}/users/me`, { headers: { 
+      authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    } })
   }
-  getPicture() {
-    return this._request(`${this._url}/cards`, { headers: { authorization: this._token } })
+  getPicture(token) {
+    return this._request(`${this._url}/cards`, { headers: { 
+      authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    } })
   }
   addHeartonServer(infoforServer) {
     return this._request(`${this._url}/cards/${infoforServer}/likes`, { method: 'PUT', headers: { authorization: this._token, 'Content-Type': 'application/json' }, })
@@ -60,11 +66,11 @@ class Api {
       })
     })
   }
-  eraseCardonServer(infoforServer) {
+  eraseCardonServer(infoforServer, token) {
     return this._request(`${this._url}/cards/${infoforServer}`, {
       method: 'DELETE',
       headers: {
-        authorization: this._token,
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
     })
@@ -87,9 +93,9 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-69',
+  baseUrl: 'http://api.varvara.maksimchuk.nomoredomainsrocks.ru',
   headers: {
-    authorization: '39c5dd3e-18c5-4109-bb7f-0a82c5dea405',
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
   }
 });

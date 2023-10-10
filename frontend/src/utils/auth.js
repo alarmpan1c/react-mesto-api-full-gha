@@ -1,7 +1,7 @@
-const baseUrl = 'https://auth.nomoreparties.co'
+const baseUrl = 'http://api.varvara.maksimchuk.nomoredomainsrocks.ru'
 
 function getResponseData(res) {
-  return res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`)
+  return res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText} ${res}`)
 }
 
 export function auth(password, email) {
@@ -25,7 +25,7 @@ export function getUserData(token) {
       'Content-Type': 'application/json',
       "Authorization" : `Bearer ${token}`
     }})
-    .then(res => getResponseData(res))
+    .then(res => res.json())
   }
 
 export function authorization(password, email) {
