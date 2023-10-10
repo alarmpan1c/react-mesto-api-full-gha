@@ -30,6 +30,7 @@ class Api {
     } })
   }
   addHeartonServer(infoforServer, token) {
+    console.log(infoforServer, token)
     return this._request(`${this._url}/cards/${infoforServer}/likes`, {
       method: 'PUT', 
       eaders: {
@@ -39,6 +40,7 @@ class Api {
     })
   }
   eraseHeartonServer(infoforServer, token) {
+    console.log(infoforServer, token)
     return this._request(`${this._url}/cards/${infoforServer}/likes`, {
       method: 'DELETE',
       headers: {
