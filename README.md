@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 130.193.40.90
+IP 130.193.40.90
 
 Frontend https://varvara.maksimchuk.nomoredomainsrocks.ru
 
