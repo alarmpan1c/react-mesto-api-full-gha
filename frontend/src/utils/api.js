@@ -93,7 +93,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://api.varvara.maksimchuk.nomoredomainsrocks.ru',
+  baseUrl: 'https://api.varvara.maksimchuk.nomoredomainsrocks.ru',
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'

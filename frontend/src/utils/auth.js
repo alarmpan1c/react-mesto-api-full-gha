@@ -1,4 +1,4 @@
-const baseUrl = 'http://api.varvara.maksimchuk.nomoredomainsrocks.ru'
+const baseUrl = 'https://api.varvara.maksimchuk.nomoredomainsrocks.ru'
 
 function getResponseData(res) {
   return res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText} ${res}`)
