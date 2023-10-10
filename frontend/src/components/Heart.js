@@ -22,8 +22,8 @@ function Heart({ heartCards, myId, cardPicId }) {
                 .catch((err) => ('Ошибка удления лайка на сервере'))
         }
         else {
-            api.addHeartonServer(cardPicId, localStorage.jwt)
             console.log(localStorage.jwt)
+            api.addHeartonServer(cardPicId, localStorage.jwt)
                 .then(res => {
 
                     setBlackOrWhite('black')
