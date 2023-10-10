@@ -1,0 +1,15 @@
+.popup__span-error {
+    display: flex;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14.52px;
+    color: #FF0000;
+    max-width: 358px;
+    padding: 5px 0 0;
+}
+
+@media screen and (max-width: 660px) {
+    .popup__span-error {
+        max-width: 248px;
+    }    
+}
